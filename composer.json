@@ -1,0 +1,26 @@
+{
+    "name": "rtens/tempan",
+    "description": "Template animation engine using RDFa annotations for PHP",
+    "keywords": ["template", "RDFa", "template animation", "watoki"],
+    "homepage": "http://github.com/rtens/tempan",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nikolas Martens",
+            "email": "Nikolas.M@rtens.org",
+            "homepage": "http://rtens.org"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.8",
+        "rtens/collections": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "rtens\\tempan": "src/",
+            "spec\\rtens\\tempan": ""
+        }
+    },
+    "minimum-stability": "dev"
+}

@@ -1,0 +1,5 @@
+/vendor
+/notes
+/.idea*
+/build
+/phpunit.xml

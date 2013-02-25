@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="bootstrap.php"
+         backupGlobals="false"
+         backupStaticAttributes="false"
+         strict="false"
+         verbose="true">
+    <testsuites>
+        <testsuite name="tempan">
+            <directory suffix="Test.php">spec</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
