@@ -18,7 +18,7 @@ class NestedModelTest extends Test {
     public function testPropertyInsideUndefinedNode() {
         $this->givenTheModel('{"text":"Hello World"}');
         $this->whenIRender('Hello <div property="undefined"><span property="text">World</span></div>');
-        $this->thenTheResultShouldBe('Hello');
+        $this->thenTheResultShouldBe('Hello <div property="undefined"><span property="text">Hello World</span></div>');
     }
 
     public function testDeeplyNestedModel() {

@@ -3,10 +3,10 @@ namespace spec\rtens\tempan;
 
 class FlatModelTest extends Test {
 
-    public function testUndefinedLeaf() {
+    public function testUndefinedProperty() {
         $this->givenTheModel('{}');
-        $this->whenIRender('Hello<span property="undefined">World</span>');
-        $this->thenTheResultShouldBe('Hello');
+        $this->whenIRender('Hello <span property="undefined">World</span>');
+        $this->thenTheResultShouldBe('Hello <span property="undefined">World</span>');
     }
 
     public function testFalseAndNullValues() {

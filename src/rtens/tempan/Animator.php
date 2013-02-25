@@ -12,6 +12,11 @@ class Animator {
      */
     private $stack;
 
+    /**
+     * @var boolean True if the last findProperty() was successful
+     */
+    private $foundProperty;
+
     function __construct($model) {
         $this->stack = array($model);
     }
@@ -21,7 +26,9 @@ class Animator {
             $property = $this->getPropertyName($element);
             $value = $this->findProperty($property, $element);
 
-            if ($this->isNull($value)) {
+            if (!$this->foundProperty) {
+                $this->animateChildren($element);
+            } else if ($this->isNull($value)) {
                 $element->remove();
             } else if ($this->isContent($value)) {
                 $element->setContent($this->getContent($value));
@@ -100,10 +107,12 @@ class Animator {
     private function findProperty($property, Element $element) {
         for ($i = count($this->stack)- 1; $i >= 0; $i--) {
             if ($this->hasModelField($this->stack[$i], $property)) {
+                $this->foundProperty = true;
                 $this->log("Property $property found.");
                 return $this->getModelField($this->stack[$i], $property, $element);
             }
         }
+        $this->foundProperty = false;
         $this->log("Property $property not found in " . json_encode(end($this->stack)));
         return null;
     }
@@ -147,8 +156,8 @@ class Animator {
         return $value === true;
     }
 
-    private function isContent($model) {
-        return $model !== true && !$this->isNodeModel($model);
+    private function isContent($value) {
+        return !$this->isNull($value) && $value !== true && !$this->isNodeModel($value);
     }
 
     private function isNodeModel($model) {
