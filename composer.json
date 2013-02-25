@@ -1,6 +1,6 @@
 {
     "name": "rtens/tempan",
-    "description": "Template animation engine using RDFa annotations for PHP",
+    "description": "Template animation engine using annotated HTML for PHP",
     "keywords": ["template", "RDFa", "template animation", "watoki"],
     "homepage": "http://github.com/rtens/tempan",
     "type": "library",
