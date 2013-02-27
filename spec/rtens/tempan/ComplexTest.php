@@ -71,8 +71,8 @@ class ComplexTest extends Test {
             </body>
         </html>';
 
-        $renderer = new Renderer($model);
-        $rendered = $renderer->render($markup);
+        $renderer = new Renderer($markup);
+        $rendered = $renderer->render($model);
 
         $expected = '
         <html>

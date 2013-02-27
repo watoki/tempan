@@ -193,6 +193,9 @@ class Animator {
         $this->loggingEnabled = $enable;
     }
 
+    /**
+     * @return array
+     */
     public function getLog() {
         return $this->log;
     }

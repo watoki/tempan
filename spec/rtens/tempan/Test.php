@@ -32,8 +32,8 @@ abstract class Test extends \PHPUnit_Framework_TestCase {
 
     protected function whenIRender($markup) {
         foreach ($this->models as $model) {
-            $renderer = new Renderer($model);
-            $this->rendered[] = substr($renderer->render("<div>$markup</div>"), 5, -6);
+            $renderer = new Renderer("<div>$markup</div>");
+            $this->rendered[] = substr($renderer->render($model), 5, -6);
         }
     }
 

@@ -10,46 +10,77 @@ class Renderer {
         '' => array('<html><body>', '</body></html>'),
     );
 
+    /**
+     * @var string
+     */
+    private $template;
+
+    /**
+     * @var \DOMElement
+     */
+    private $root;
+
+    /**
+     * @var Element
+     */
+    private $rootElement;
+
+    /**
+     * @var array
+     */
     private $log;
 
+    /**
+     * @var boolean
+     */
     private $logginEnabled;
 
-    private $model;
-
-    function __construct($model) {
-        $this->model = $model;
+    function __construct($template) {
+        $this->template = mb_convert_encoding($template, 'HTML-ENTITIES', 'UTF-8');
     }
 
-    public function render($template) {
-        $root = $this->stringToElement($template);
-        $animator = new Animator($this->model);
+    public function getRoot() {
+        if (!$this->rootElement) {
+            $this->root = $this->createDocument();
+            $this->rootElement = new Element($this->root);
+        }
+
+        return $this->rootElement;
+    }
+
+    /**
+     * @param array|object $model
+     * @return string
+     */
+    public function render($model = array()) {
+        $animator = new Animator($model);
         $animator->enableLogging($this->logginEnabled);
-        $animator->animate(new Element($root));
+        $animator->animate($this->getRoot());
 
         if ($this->logginEnabled) {
             $this->log = $animator->getLog();
         }
 
-        return $this->elementToString($root, $template);
+        return $this->__toString();
     }
 
-    private function stringToElement($html) {
+    private function createDocument() {
         $doc = new \DOMDocument();
-        $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
 
-        if (!$doc->loadHTML($html)) {
+        if (!$doc->loadHTML($this->template)) {
             throw new \Exception('Error while parsing mark-up.');
         }
 
         return $doc->documentElement;
     }
 
-    public function elementToString(\DOMElement $element, $template) {
-        $doc = $element->ownerDocument;
+    public function __toString() {
+        $this->getRoot();
+        $doc = $this->root->ownerDocument;
         $doc->formatOutput = true;
-        $content = $doc->saveHTML($element);
+        $content = $doc->saveHTML($this->root);
 
-        $input = trim(preg_replace('/>\s+?</', '><', $template));
+        $input = trim(preg_replace('/>\s+?</', '><', $this->template));
         foreach (self::$tagPairs as $match => $replace) {
             if (substr($input, 0, strlen($match)) == $match) {
                 $content = str_replace($replace, '', $content);

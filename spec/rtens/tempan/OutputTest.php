@@ -9,24 +9,30 @@ class OutputTest extends Test {
     public function testUtf8Encoding() {
         $html = '<html><body>öäü</body></html>';
 
-        $renderer = new Renderer(array());
+        $renderer = new Renderer($html);
 
-        $this->assertEquals($html, $renderer->render($html));
+        $this->assertEquals($html, $renderer->render());
     }
 
     public function testOutputShouldEqualInput() {
-        $html1 = "\n <html>\n  \t<body><div><b>Hello</b></div></body></html>";
-        $html1out = "<html><body><div><b>Hello</b></div></body></html>";
-        $html2 = '<html><div><b>Hello</b></div></html>';
-        $html3 = '<body><div><b>Hello</b></div></body>';
-        $html4 = '<div><b>Hello</b></div>';
+        $in = array(
+            "\n <html>\n  \t<body><div><b>Hello</b></div></body></html>",
+            '<html><div><b>Hello</b></div></html>',
+            '<body><div><b>Hello</b></div></body>',
+            '<div><b>Hello</b></div>'
+        );
 
-        $renderer = new Renderer(array());
+        $out = array(
+            "<html><body><div><b>Hello</b></div></body></html>",
+            $in[1],
+            $in[2],
+            $in[3]
+        );
 
-        $this->assertEquals($html1out, $renderer->render($html1));
-        $this->assertEquals($html2, $renderer->render($html2));
-        $this->assertEquals($html3, $renderer->render($html3));
-        $this->assertEquals($html4, $renderer->render($html4));
+        foreach ($in as $i => $html) {
+            $renderer = new Renderer($html);
+            $this->assertEquals($out[$i], $renderer->render());
+        }
     }
 
 }
