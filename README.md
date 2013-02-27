@@ -99,7 +99,7 @@ can be used with
 
 ### Remove elements ###
 
-If the value is `false`, `null`, undefined or an empty array, the corresponding element will be removed. If the value is `true`, the element won't be modified but its children.
+If the value is `false`, `null`, an empty array, the corresponding element will be removed. If the value is `true`, the element won't be modified but its children. An undefined propery is ignored.
 
 ### Repeated elements ###
 
