@@ -1,8 +1,8 @@
 <?php
-namespace spec\rtens\tempan;
+namespace spec\watoki\tempan;
 
-use rtens\collections\Map;
-use rtens\tempan\Renderer;
+use watoki\collections\Map;
+use watoki\tempan\Renderer;
 
 class OutputTest extends Test {
 

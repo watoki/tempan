@@ -1,5 +1,5 @@
 <?php
-namespace spec\rtens\tempan;
+namespace spec\watoki\tempan;
 
 class NestedModelTest extends Test {
 

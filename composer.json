@@ -1,8 +1,8 @@
 {
-    "name": "rtens/tempan",
+    "name": "watoki/tempan",
     "description": "Template animation engine using annotated HTML for PHP",
     "keywords": ["template", "RDFa", "template animation", "watoki"],
-    "homepage": "http://github.com/rtens/tempan",
+    "homepage": "http://github.com/watoki/tempan",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -14,12 +14,12 @@
     ],
     "require": {
         "php": ">=5.3.8",
-        "rtens/collections": "*"
+        "watoki/collections": "*"
     },
     "autoload": {
         "psr-0": {
-            "rtens\\tempan": "src/",
-            "spec\\rtens\\tempan": ""
+            "watoki\\tempan": "src/",
+            "spec\\watoki\\tempan": ""
         }
     },
     "minimum-stability": "dev"

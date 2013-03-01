@@ -1,10 +1,10 @@
 <?php
-namespace rtens\tempan;
+namespace watoki\tempan;
 
-use rtens\collections\events\MapSetEvent;
-use rtens\collections\events\MapRemoveEvent;
-use rtens\collections\Map;
-use rtens\collections\Liste;
+use watoki\collections\events\MapSetEvent;
+use watoki\collections\events\MapRemoveEvent;
+use watoki\collections\Map;
+use watoki\collections\Liste;
 
 class Element {
 
@@ -39,7 +39,7 @@ class Element {
     }
 
     /**
-     * @return \rtens\collections\Map
+     * @return \watoki\collections\Map
      */
     public function getAttributes() {
         if (!$this->attributes) {
@@ -108,7 +108,7 @@ class Element {
 
     /**
      * @param string|null $property Filter by property name
-     * @return \rtens\collections\Liste|Element[]
+     * @return \watoki\collections\Liste|Element[]
      */
     public function getChildren($property = null) {
         if (!$this->children) {
@@ -135,7 +135,7 @@ class Element {
 
     /**
      * @param $property
-     * @return \rtens\collections\Liste
+     * @return \watoki\collections\Liste
      */
     private function filterBy($property) {
         $filterd = new Liste();

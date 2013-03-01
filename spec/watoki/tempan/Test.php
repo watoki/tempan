@@ -1,7 +1,7 @@
 <?php
-namespace spec\rtens\tempan;
+namespace spec\watoki\tempan;
 
-use rtens\tempan\Renderer;
+use watoki\tempan\Renderer;
 
 abstract class Test extends \PHPUnit_Framework_TestCase {
 

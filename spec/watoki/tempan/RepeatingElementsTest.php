@@ -1,8 +1,8 @@
 <?php
-namespace spec\rtens\tempan;
+namespace spec\watoki\tempan;
 
-use rtens\collections\Liste;
-use rtens\collections\Map;
+use watoki\collections\Liste;
+use watoki\collections\Map;
 
 class RepeatingElementsTest extends Test {
 

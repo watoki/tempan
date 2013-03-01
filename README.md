@@ -136,7 +136,7 @@ Siblings of the element in the template will be removed before repeating the ele
 
 There are three options. If you already have [Composer], you can use
 
-	php composer.phar create-project rtens/tempan
+	php composer.phar create-project watoki/tempan
 
 to check out *tempan* as a stand-alone project (you'll need git and php as well). To run the test suite use
 	
@@ -145,14 +145,14 @@ to check out *tempan* as a stand-alone project (you'll need git and php as well)
 	
 If you don't have Composer yet, or want to install a different branch you can use
 
-    git clone https://github.com/rtens/tempan.git
+    git clone https://github.com/watoki/tempan.git
     cd tempan
     php install.php
 
 To use it in your own project, add the following lines to your `composer.json`.
 
     "require" : {
-        "rtens/tempan" : "*"
+        "watoki/tempan" : "*"
     },
     "minimum-stability": "dev"
 	
@@ -162,6 +162,6 @@ To use it in your own project, add the following lines to your `composer.json`.
 
 For a complete description of all features and usage examples, check out the test cases in the [spec] folder. You can find an example using all the basic features together in [ComplexTest.php].
 
-[spec]: https://github.com/rtens/tempan/tree/master/spec/rtens/tempan
-[ComplexTest.php]: https://github.com/rtens/tempan/tree/master/spec/rtens/tempan/ComplexTest.php
+[spec]: https://github.com/watoki/tempan/tree/master/spec/watoki/tempan
+[ComplexTest.php]: https://github.com/watoki/tempan/tree/master/spec/watoki/tempan/ComplexTest.php
 		

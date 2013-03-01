@@ -1,8 +1,8 @@
 <?php
-namespace spec\rtens\tempan;
+namespace spec\watoki\tempan;
 
-use rtens\tempan\Renderer;
-use rtens\collections\Collection;
+use watoki\tempan\Renderer;
+use watoki\collections\Collection;
 
 class ComplexTest extends Test {
 

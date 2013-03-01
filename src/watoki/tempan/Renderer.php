@@ -1,5 +1,5 @@
 <?php
-namespace rtens\tempan;
+namespace watoki\tempan;
 
 class Renderer {
 
