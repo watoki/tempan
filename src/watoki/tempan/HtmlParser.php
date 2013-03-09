@@ -63,4 +63,11 @@ class HtmlParser {
         return $content;
     }
 
+    /**
+     * @return \DOMDocument
+     */
+    public function getDocument() {
+        return $this->doc;
+    }
+
 }
