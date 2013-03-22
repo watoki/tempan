@@ -5,6 +5,7 @@ class HtmlParser {
 
     private static $tagPairs = array(
         '<html><body>' => array(),
+        '<html><head>' => array(),
         '<body>' => array('<html>', '</html>'),
         '<html>' => array('<body>', '</body>'),
         '' => array('<html><body>', '</body></html>'),
