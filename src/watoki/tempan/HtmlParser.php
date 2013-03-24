@@ -40,7 +40,9 @@ class HtmlParser {
 
         $internal_errors = libxml_use_internal_errors(true);
         if (!$this->doc->loadHTML($this->html) || libxml_get_errors()) {
-            throw new \Exception('Error while parsing mark-up: ' . json_encode(libxml_get_errors()) . ' While parsing: ' . $this->html);
+            $errors = json_encode(libxml_get_errors());
+            libxml_clear_errors();
+            throw new \Exception('Error while parsing mark-up: ' . $errors . ' While parsing: ' . $this->html);
         }
         libxml_use_internal_errors($internal_errors);
     }
