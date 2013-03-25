@@ -25,6 +25,10 @@ class HtmlParser {
         $this->html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
     }
 
+    public function isHtmlDocument() {
+        return substr(trim($this->html), 0, 5) == '<html';
+    }
+
     /**
      * @return \DOMElement
      */
