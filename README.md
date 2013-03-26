@@ -1,4 +1,4 @@
-# tempan #
+# tempan [![Build Status](https://travis-ci.org/watoki/tempan.png?branch=master)](https://travis-ci.org/watoki/tempan)
 
 *tempan* is a template engine which uses annotated HTML to render data provided by a view model.
 
