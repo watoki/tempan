@@ -3,6 +3,8 @@ namespace watoki\tempan;
 
 class Renderer {
 
+    static $CLASS = __CLASS__;
+
     /**
      * @var HtmlParser
      */
