@@ -148,7 +148,7 @@ class Element {
     }
 
     public function setContent($content) {
-        if ($content[0] != '<') {
+        if (substr(trim($content), 0, 1) != '<') {
             $this->element->nodeValue = $content;
             return;
         }
