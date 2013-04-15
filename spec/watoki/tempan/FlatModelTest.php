@@ -46,4 +46,10 @@ class FlatModelTest extends Test {
         $this->thenTheResultShouldBe('<div><h1><a property="message">Hello World</a></h1></div>');
     }
 
+    public function testHtmlContent() {
+        $this->givenTheModel('{"html":"<b>Hello</b>"}');
+        $this->whenIRender('<div property="html"><span>Before</span></div>');
+        $this->thenTheResultShouldBe('<div property="html"><b>Hello</b></div>');
+    }
+
 }

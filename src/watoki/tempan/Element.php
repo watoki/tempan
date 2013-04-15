@@ -148,6 +148,11 @@ class Element {
     }
 
     public function setContent($content) {
+        if ($content[0] != '<') {
+            $this->element->nodeValue = $content;
+            return;
+        }
+
         foreach ($this->getChildren() as $child) {
             $this->removeChild($child);
         }
@@ -156,7 +161,10 @@ class Element {
             $this->element->removeChild($child);
         }
 
-        $this->element->appendChild(new \DOMText($content));
+        $parser = new HtmlParser($content);
+        foreach ($parser->getRoot()->firstChild->childNodes as $child) {
+            $this->element->appendChild($this->element->ownerDocument->importNode($child, true));
+        }
     }
 
     public function getContent() {
