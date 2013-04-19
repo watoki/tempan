@@ -16,7 +16,7 @@ class OutputTest extends Test {
 
     public function testOutputShouldEqualInput() {
         $in = array(
-            "\n <html>\n  \t<body><div><b>Hello</b></div></body></html>",
+            "\n<html><body><div><b>Hello</b></div></body></html>",
             '<html><head></head><body>Hi</body></html>',
             '<html><div><b>Hello</b></div></html>',
             '<body><div><b>Hello</b></div></body>',

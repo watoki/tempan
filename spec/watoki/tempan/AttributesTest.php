@@ -11,8 +11,8 @@ class AttributesTest extends Test {
 
     public function testLeafAttributesShouldBeReplaced() {
         $this->givenTheModel('{"image": {"src":"http://example.com", "alt":"Test"}}');
-        $this->whenIRender('<img property="image" src="" alt="nothing">');
-        $this->thenTheResultShouldBe('<img property="image" src="http://example.com" alt="Test">');
+        $this->whenIRender('<img property="image" src="" alt="nothing"/>');
+        $this->thenTheResultShouldBe('<img property="image" src="http://example.com" alt="Test"/>');
     }
 
     public function testChildWithNameOfAttribute() {

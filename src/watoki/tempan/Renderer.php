@@ -1,19 +1,23 @@
 <?php
 namespace watoki\tempan;
 
+use watoki\dom\Element;
+use watoki\dom\Parser;
+use watoki\dom\Printer;
+
 class Renderer {
 
     static $CLASS = __CLASS__;
 
     /**
-     * @var HtmlParser
+     * @var Parser
      */
     public $parser;
 
     /**
      * @var Element
      */
-    private $rootElement;
+    private $root;
 
     /**
      * @var array
@@ -26,15 +30,7 @@ class Renderer {
     private $logginEnabled;
 
     function __construct($template) {
-        $this->parser = new HtmlParser($template);
-    }
-
-    public function getRoot() {
-        if (!$this->rootElement) {
-            $this->rootElement = new Element($this->parser->getRoot());
-        }
-
-        return $this->rootElement;
+        $this->parser = new Parser($template);
     }
 
     /**
@@ -44,13 +40,18 @@ class Renderer {
     public function render($model = array()) {
         $animator = new Animator($model);
         $animator->enableLogging($this->logginEnabled);
-        $animator->animate($this->getRoot());
+        foreach ($this->parser->getNodes() as $node) {
+            if ($node instanceof Element) {
+                $animator->animate($node);
+            }
+        }
 
         if ($this->logginEnabled) {
             $this->log = $animator->getLog();
         }
 
-        return $this->parser->toString();
+        $printer = new Printer();
+        return $printer->printNodes($this->parser->getNodes());
     }
 
     public function enableLogging($enable = true) {

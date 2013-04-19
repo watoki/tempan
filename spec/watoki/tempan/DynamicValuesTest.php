@@ -43,7 +43,7 @@ class DynamicValuesTest extends Test {
         $this->givenTheClass('class StringModel {
             public function __construct() {
                 $this->shorten = function ($element, $animator) {
-                    return substr($element->getContent(), 0, 7);
+                    return substr($element->getChildren()->first()->getText(), 0, 7);
                 };
             }
         }');
@@ -61,8 +61,8 @@ class DynamicValuesTest extends Test {
             public function __construct() {
                 $this->shorten = function ($element, $animator) {
                     $animator->animateChildren($element);
-                    $element->getAttributes()->set("title", $element->getContent());
-                    return substr($element->getContent(), 0, 4);
+                    $element->setAttribute("title", $element->getChildren()->first()->getChildren()->first()->getText());
+                    return substr($element->getChildren()->first()->getChildren()->first()->getText(), 0, 4);
                 };
             }
         }');
