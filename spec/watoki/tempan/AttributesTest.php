@@ -27,4 +27,10 @@ class AttributesTest extends Test {
         $this->thenTheResultShouldBe('<span property="message" title="Dont change me"><span property="text">Hello World</span></span>');
     }
 
+    public function testSpecialContentAttribute() {
+        $this->givenTheModel('{"item": {"title": "Hello", "_":"World"}}');
+        $this->whenIRender('<span property="item" title="What">Up</span>');
+        $this->thenTheResultShouldBe('<span property="item" title="Hello">World</span>');
+    }
+
 }

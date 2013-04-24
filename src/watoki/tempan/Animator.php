@@ -7,6 +7,8 @@ use watoki\dom\Text;
 
 class Animator {
 
+    const CONTENT_FIELD = '_';
+
     private $log = array();
 
     private $loggingEnabled = false;
@@ -45,7 +47,12 @@ class Animator {
             } else if ($this->isNodeModel($value)) {
                 $this->stack[] = $value;
                 $this->animateAttributes($element);
-                $this->animateChildren($element);
+
+                if ($this->hasModelField($value, self::CONTENT_FIELD)) {
+                    $this->setContent($element, $this->getModelField($value, self::CONTENT_FIELD, $element));
+                } else {
+                    $this->animateChildren($element);
+                }
                 array_pop($this->stack);
             }
         } else {
