@@ -159,7 +159,14 @@ class Animator {
 
     private function getModelField($model, $field, Element $element) {
         if (is_array($model)) {
-            return isset($model[$field]) ? $model[$field] : null;
+            if (!isset($model[$field])) {
+                return null;
+            } else if (is_callable($model[$field])) {
+                $callable = $model[$field];
+                return $callable($element, $this);
+            } else {
+                return $model[$field];
+            }
         } else if (is_object($model)) {
             if (property_exists($model, $field)) {
                 if (is_callable($model->$field)) {

@@ -1,6 +1,8 @@
 <?php
 namespace spec\watoki\tempan;
 
+use watoki\dom\Element;
+
 class DynamicValuesTest extends Test {
 
     public function testMethodCall() {
@@ -39,7 +41,7 @@ class DynamicValuesTest extends Test {
         ');
     }
 
-    public function testClosureCall() {
+    public function testValueFromClosure() {
         $this->givenTheClass('class StringModel {
             public function __construct() {
                 $this->shorten = function ($element, $animator) {
@@ -53,6 +55,17 @@ class DynamicValuesTest extends Test {
         $this->whenIRender('<div property="shorten">Shorten this</div>');
 
         $this->thenTheResultShouldBe('<div property="shorten">Shorten</div>');
+    }
+
+    public function testValueFromClosureInArray() {
+        $this->givenTheModelObject(array('test' => function (Element $element) {
+                    $element->setAttribute('class', 'this');
+                    return 'Test';
+                }));
+
+        $this->whenIRender('<div property="test">Replace this</div>');
+
+        $this->thenTheResultShouldBe('<div property="test" class="this">Test</div>');
     }
 
     public function testAnimateBeforeTransformation() {
