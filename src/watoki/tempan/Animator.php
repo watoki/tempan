@@ -161,7 +161,7 @@ class Animator {
         if (is_array($model)) {
             if (!isset($model[$field])) {
                 return null;
-            } else if (is_callable($model[$field])) {
+            } else if (!is_string($model[$field]) && is_callable($model[$field])) {
                 $callable = $model[$field];
                 return $callable($element, $this);
             } else {
@@ -169,7 +169,7 @@ class Animator {
             }
         } else if (is_object($model)) {
             if (property_exists($model, $field)) {
-                if (is_callable($model->$field)) {
+                if (!is_string($model->$field) && is_callable($model->$field)) {
                     $callable = $model->$field;
                     return $callable($element, $this);
                 }

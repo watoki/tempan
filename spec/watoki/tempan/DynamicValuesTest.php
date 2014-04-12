@@ -68,6 +68,21 @@ class DynamicValuesTest extends Test {
         $this->thenTheResultShouldBe('<div property="test" class="this">Test</div>');
     }
 
+    public function testDontMistakeFunctionNamesForCallable() {
+        $this->givenTheModelObject(array('notCallable' => 'date'));
+        $this->whenIRender('<div property="notCallable"></div>');
+        $this->thenTheResultShouldBe('<div property="notCallable">date</div>');
+
+        $this->givenTheClass('class SomeModel {
+            public function __construct() {
+                $this->neither = "date";
+            }
+        }');
+        $this->givenTheModelIsInstanceOfClass('SomeModel');
+        $this->whenIRender('<div property="neither"></div>');
+        $this->thenTheResultShouldBe('<div property="neither">date</div>');
+    }
+
     public function testAnimateBeforeTransformation() {
         $this->givenTheClass('class AnotherModel {
             public $content = "Some long string";
