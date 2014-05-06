@@ -5,12 +5,10 @@ use watoki\tempan\Renderer;
 
 abstract class Test extends \PHPUnit_Framework_TestCase {
 
-    /**
-     * @var string[]
-     */
-    private $rendered = array();
+    /** @var string */
+    private $rendered;
 
-    private $models = array();
+    private $model;
 
     protected function background() {
     }
@@ -27,21 +25,17 @@ abstract class Test extends \PHPUnit_Framework_TestCase {
     }
 
     protected function givenTheModelObject($model) {
-        $this->models[] = $model;
+        $this->model = $model;
     }
 
     protected function whenIRender($markup) {
-        foreach ($this->models as $model) {
-            $renderer = new Renderer("<div>$markup</div>");
-            $rendered = $renderer->render($model);
-            $this->rendered[] = substr($rendered, 5, -6);
-        }
+        $renderer = new Renderer("<div>$markup</div>");
+        $rendered = $renderer->render($this->model);
+        $this->rendered = substr($rendered, 5, -6);
     }
 
     protected function thenTheResultShouldBe($expected) {
-        foreach ($this->rendered as $rendered) {
-            $this->assertEquals($this->clean($expected), $this->clean($rendered));
-        }
+        $this->assertEquals($this->clean($expected), $this->clean($this->rendered));
     }
 
     protected function clean($string) {
