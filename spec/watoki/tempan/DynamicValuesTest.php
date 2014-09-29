@@ -68,7 +68,7 @@ class DynamicValuesTest extends Test {
         $this->thenTheResultShouldBe('<div property="test" class="this">Test</div>');
     }
 
-    public function testDontMistakeFunctionNamesForCallable() {
+    public function testDoNotMistakeFunctionNamesForCallable() {
         $this->givenTheModelObject(array('notCallable' => 'date'));
         $this->whenIRender('<div property="notCallable"></div>');
         $this->thenTheResultShouldBe('<div property="notCallable">date</div>');
@@ -81,6 +81,17 @@ class DynamicValuesTest extends Test {
         $this->givenTheModelIsInstanceOfClass('SomeModel');
         $this->whenIRender('<div property="neither"></div>');
         $this->thenTheResultShouldBe('<div property="neither">date</div>');
+    }
+
+    public function testPassArrays() {
+        $this->givenTheModelObject(array(
+                'say' => function (Element $element) {
+                            return $element->getAttribute('data-what')->getValue();
+                        }
+        ));
+
+        $this->whenIRender('<div property="say" data-what="Hello World">Say it</div>');
+        $this->thenTheResultShouldBe('<div property="say" data-what="Hello World">Hello World</div>');
     }
 
     ###############################################################################################################
