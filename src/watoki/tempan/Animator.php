@@ -185,7 +185,7 @@ class Animator {
      * @return mixed
      */
     private function invoke($callable, $element) {
-        return $callable($element);
+        return call_user_func($callable, $element);
     }
 
     private function isNull($value) {
