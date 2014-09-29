@@ -44,7 +44,7 @@ class DynamicValuesTest extends Test {
     public function testValueFromClosure() {
         $this->givenTheClass('class StringModel {
             public function __construct() {
-                $this->shorten = function ($element, $animator) {
+                $this->shorten = function ($element) {
                     return substr($element->getChildren()->first()->getText(), 0, 7);
                 };
             }
@@ -83,24 +83,7 @@ class DynamicValuesTest extends Test {
         $this->thenTheResultShouldBe('<div property="neither">date</div>');
     }
 
-    public function testAnimateBeforeTransformation() {
-        $this->givenTheClass('class AnotherModel {
-            public $content = "Some long string";
-            public function __construct() {
-                $this->shorten = function ($element, $animator) {
-                    $animator->animateChildren($element);
-                    $element->setAttribute("title", $element->getChildren()->first()->getChildren()->first()->getText());
-                    return substr($element->getChildren()->first()->getChildren()->first()->getText(), 0, 4);
-                };
-            }
-        }');
-
-        $this->givenTheModelIsInstanceOfClass('AnotherModel');
-
-        $this->whenIRender('<div property="shorten"><span property="content">Shorten this</span></div>');
-
-        $this->thenTheResultShouldBe('<div property="shorten" title="Some long string">Some</div>');
-    }
+    ###############################################################################################################
 
     private function givenTheClass($def) {
         eval($def);

@@ -162,23 +162,30 @@ class Animator {
             if (!isset($model[$field])) {
                 return null;
             } else if (!is_string($model[$field]) && is_callable($model[$field])) {
-                $callable = $model[$field];
-                return $callable($element, $this);
+                return $this->invoke($model[$field], $element);
             } else {
                 return $model[$field];
             }
         } else if (is_object($model)) {
             if (property_exists($model, $field)) {
                 if (!is_string($model->$field) && is_callable($model->$field)) {
-                    $callable = $model->$field;
-                    return $callable($element, $this);
+                    return $this->invoke($model->$field, $element);
                 }
                 return $model->$field;
             } else if (method_exists($model, $field)) {
-                return $model->$field($element, $this);
+                return $this->invoke(array($model, $field), $element);
             }
         }
         return null;
+    }
+
+    /**
+     * @param callable $callable
+     * @param Element $element
+     * @return mixed
+     */
+    private function invoke($callable, $element) {
+        return $callable($element);
     }
 
     private function isNull($value) {
