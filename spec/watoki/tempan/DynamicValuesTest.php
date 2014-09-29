@@ -83,7 +83,7 @@ class DynamicValuesTest extends Test {
         $this->thenTheResultShouldBe('<div property="neither">date</div>');
     }
 
-    public function testPassArrays() {
+    public function testPassArguments() {
         $this->givenTheModelObject(array(
                 'say' => function (Element $element) {
                             return $element->getAttribute('data-what')->getValue();
