@@ -30,16 +30,6 @@ class Animator {
     public function animate(Element $element) {
         if ($this->isProperty($element)) {
             $property = $this->getPropertyName($element);
-            if (strpos($property, '.') !== false) {
-                $value = null;
-                $parts = explode('.', $property);
-                $property = array_pop($parts);
-
-                foreach ($parts as $part) {
-                    $this->stack[] = $this->findProperty($part, $element);
-                }
-            }
-
             $value = $this->findProperty($property, $element);
 
             if (!$this->foundProperty) {
