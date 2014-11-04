@@ -9,6 +9,12 @@ class NestedModelTest extends Test {
         $this->thenTheResultShouldBe('<div property="post"><div property="author">John</div><div property="text">Hello World</div></div>');
     }
 
+    function testModelTraversal() {
+        $this->givenTheModel('{"post":{"content":{"author":"John", "text":"Hello World"}}}');
+        $this->whenIRender('<div property="post.content"><div property="author">Me</div><div property="text">Hi</div></div>');
+        $this->thenTheResultShouldBe('<div property="post.content"><div property="author">John</div><div property="text">Hello World</div></div>');
+    }
+
     public function testLeafInsideLeaf() {
         $this->givenTheModel('{"email":{"href":"mailto:test@example.com"}, "name":"Test"}');
         $this->whenIRender('<a property="email" href=""><span property="name">Name</span></a>');
