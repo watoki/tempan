@@ -2,7 +2,6 @@
 namespace spec\watoki\tempan;
 
 use watoki\collections\Liste;
-use watoki\collections\Map;
 
 class RepeatingElementsTest extends Test {
 
@@ -195,5 +194,13 @@ class RepeatingElementsTest extends Test {
                 </div>
             </div>
         ');
+    }
+
+    function testListObjects() {
+        $this->givenTheModelObject(array(
+            'item' => new Liste(array('one', 'two'))
+        ));
+        $this->whenIRender('<span property="item">an item</span>');
+        $this->thenTheResultShouldBe('<span property="item">one</span><span property="item">two</span>');
     }
 }

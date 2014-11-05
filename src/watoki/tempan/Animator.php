@@ -2,6 +2,7 @@
 namespace watoki\tempan;
 
 use watoki\collections\Liste;
+use watoki\collections\Map;
 use watoki\dom\Element;
 use watoki\dom\Text;
 
@@ -153,11 +154,16 @@ class Animator {
 
     private function hasModelField($model, $field) {
         return (is_array($model) && array_key_exists($field, $model))
+                || ($model instanceof Map && $model->has($field))
                 || (is_object($model) && property_exists($model, $field))
                 || (is_object($model) && method_exists($model, $field));
     }
 
     private function getModelField($model, $field, Element $element) {
+        if ($model instanceof Map) {
+            $model = $model->toArray();
+        }
+
         if (is_array($model)) {
             if (!isset($model[$field])) {
                 return null;
@@ -201,7 +207,7 @@ class Animator {
     }
 
     private function isNodeModel($model) {
-        return is_object($model) || is_array($model);
+        return is_object($model) || is_array($model) || $model instanceof Map;
     }
 
     private function getContent($model) {
@@ -209,7 +215,7 @@ class Animator {
     }
 
     private function isList($model) {
-        if (!is_array($model)) {
+        if (!is_array($model) && !($model instanceof Liste)) {
             return false;
         }
 

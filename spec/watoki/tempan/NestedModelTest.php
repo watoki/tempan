@@ -1,6 +1,8 @@
 <?php
 namespace spec\watoki\tempan;
 
+use watoki\collections\Map;
+
 class NestedModelTest extends Test {
 
     public function testNestedProperty() {
@@ -143,5 +145,15 @@ class NestedModelTest extends Test {
         $this->givenTheModel('{"isTrue":true, "message":"Hello World"}');
         $this->whenIRender('<div property="isTrue"><div property="message">Hi</div></div>');
         $this->thenTheResultShouldBe('<div property="isTrue"><div property="message">Hello World</div></div>');
+    }
+
+    public function testMapObject() {
+        $this->givenTheModelObject(new Map(array(
+            'one' => new Map(array(
+                    'two' => 'three'
+                ))
+        )));
+        $this->whenIRender('<div property="one"><div property="two">Hello</div></div>');
+        $this->thenTheResultShouldBe('<div property="one"><div property="two">three</div></div>');
     }
 }
