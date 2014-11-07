@@ -103,7 +103,9 @@ class Animator {
             array_pop($this->stack);
         }
 
-        $this->removeSiblingProperties($element, $key);
+        if ($element->getParent()) {
+            $this->removeSiblingProperties($element, $key);
+        }
     }
 
     private function insertAndAnimateSibling(Element $element) {

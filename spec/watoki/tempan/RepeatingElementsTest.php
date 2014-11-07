@@ -59,6 +59,22 @@ class RepeatingElementsTest extends Test {
             <span property="item">Two</span>');
     }
 
+    public function testDoubleList() {
+        $this->givenTheModel('{
+            "item": [[
+                "One",
+                "Two"
+            ]]
+        }');
+        $this->whenIRender('
+            <span property="item">an item</span>
+            <span property="item">delete me</span>
+            <span property="item">delete me too</span>');
+        $this->thenTheResultShouldBe('
+            <span property="item">One</span>
+            <span property="item">Two</span>');
+    }
+
     public function testSupefluousSiblingsOfNestedModel() {
         $this->givenTheModel('{
             "item": [
