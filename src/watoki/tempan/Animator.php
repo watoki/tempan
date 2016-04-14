@@ -157,8 +157,8 @@ class Animator {
     private function hasModelField($model, $field) {
         return (is_array($model) && array_key_exists($field, $model))
                 || ($model instanceof Map && $model->has($field))
-                || (is_object($model) && property_exists($model, $field))
-                || (is_object($model) && method_exists($model, $field));
+                || (is_object($model) && method_exists($model, $field))
+                || (is_object($model) && property_exists($model, $field));
     }
 
     private function getModelField($model, $field, Element $element) {
@@ -175,13 +175,13 @@ class Animator {
                 return $model[$field];
             }
         } else if (is_object($model)) {
-            if (property_exists($model, $field)) {
+            if (method_exists($model, $field)) {
+                return $this->invoke([$model, $field], $element);
+            } else if (property_exists($model, $field)) {
                 if (!is_string($model->$field) && is_callable($model->$field)) {
                     return $this->invoke($model->$field, $element);
                 }
                 return $model->$field;
-            } else if (method_exists($model, $field)) {
-                return $this->invoke(array($model, $field), $element);
             }
         }
         return null;
