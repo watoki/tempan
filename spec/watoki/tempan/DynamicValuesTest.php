@@ -94,6 +94,23 @@ class DynamicValuesTest extends Test {
         $this->thenTheResultShouldBe('<div property="say" data-what="Hello World">Hello World</div>');
     }
 
+    public function testFavorMethods() {
+        $this->givenTheClass('class PrivateAttribute {
+            private $value;
+            public function __construct($int) {
+                $this->value = $int;
+            }
+            public function value() {
+                return $this->value . "!";
+            }
+        }');
+
+        $this->givenTheModelIsInstanceOfClass('PrivateAttribute', 'foo');
+
+        $this->whenIRender('<div property="value"></div>');
+        $this->thenTheResultShouldBe('<div property="value">foo!</div>');
+    }
+
     ###############################################################################################################
 
     private function givenTheClass($def) {
