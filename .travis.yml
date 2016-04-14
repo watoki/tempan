@@ -3,7 +3,6 @@ php:
   - 5.6
   - 5.5
   - 5.4
-  - 5.3
   - hhvm
 before_script: composer install --dev
 script: php vendor/phpunit/phpunit/phpunit.php --log-tap report.tap
